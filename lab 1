@@ -1,0 +1,343 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+// 1.2
+int sumLastNums (int x)
+{
+    int a1, a2;
+    a1 = x % 10;
+    a2 = (x / 10) % 10;
+    return a1 + a2;
+}
+
+// 1.4
+bool isPositive(int x)
+{
+    return x > 0;
+}
+
+
+
+// 1.6 
+bool isUpperCase(char x)
+{
+    return x >= 'A' && x <= 'Z'; 
+}
+
+
+// 1.8 
+bool isDivisor (int a, int b)
+{
+    return (a != 0 && b % a == 0) || (b != 0 && a % b == 0);
+}
+
+// 1.10
+int lastNumSum(int a, int b) {
+    int lastA = a % 10;
+    int lastB = b % 10; 
+    return lastA + lastB;
+}
+
+// 2.2
+double safeDiv(int x, int y)
+{
+    if (y == 0)
+    {
+        return 0; 
+    }
+    return (1.0 * x) / y; 
+}
+
+// 2.4 
+string makeDecision(int x, int y)
+{
+    if (x > y)
+        return to_string(x) + " > " + to_string(y);
+    else if (x < y)
+        return to_string(x) + " < " + to_string(y);
+    else
+        return to_string(x) + " == " + to_string(y);
+}
+
+
+// 2.6 
+bool sum3 (int x, int y, int z)
+{
+    return (x + y == z) || (x + z == y) || (y + z == x);
+}
+
+// 2.8 
+string age(int x)
+{
+    int lastDigit = x % 10; 
+    int lastTwoDigits = x % 100;     
+    
+    if (lastDigit == 1 && lastTwoDigits != 11)
+    {
+        return to_string(x) + " год";
+    } else if ((lastDigit == 2 || lastDigit == 3 || lastDigit == 4) && (lastTwoDigits != 12 && lastTwoDigits != 13 && lastTwoDigits != 14)) {
+        return to_string(x) + " года";
+    } else {
+        return to_string(x) + " лет";
+    }
+}
+
+// 3.2 
+string reverseListNums(int x)
+{
+    string result = ""; // Строка для хранения результата
+    for (int i = x; i >= 0; i--)
+    {
+        result += to_string(i); // Добавляем число в строку
+        if (i != 0) { // Добавляем пробел, если это не последнее число
+            result += " ";
+        }
+    }
+    
+    return result;
+}
+
+// 3.4 
+int pow(int x, int y) {
+    int result = 1; // Начинаем с 1, так как умножение на 1 не меняет результат
+    for (int i = 0; i < y; i++) {
+        result *= x; // Умножаем результат на x, y раз
+    }
+    return result; 
+}
+
+// 3.6
+bool equalNum(int x)
+{
+    int lastDigit = x % 10;
+    while (x > 0)
+    {
+        if (x % 10 != lastDigit)
+            return false;
+        x /= 10;
+    }
+    return true;
+}
+
+// 3.8
+void leftTriangle(int x)
+{
+    for (int i = 1; i <= x; i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            cout << "*";
+        }
+        cout << endl;
+    }
+}
+
+//3.10
+void guessGame()
+{
+    int secretNumber = rand() % 10; 
+    int attempts = 0;
+    int guess;
+    do
+    {
+        cout << "Введите число от 0 до 9: ";
+        cin >> guess;
+        attempts++;
+        if (guess < secretNumber)
+            cout << "Загаданное число больше." << endl;
+        else if (guess > secretNumber)
+            cout << "Загаданное число меньше." << endl;
+    } while (guess != secretNumber);
+
+    cout << "Вы угадали число за " << attempts << " попыток!" << endl;
+}
+
+// 4.2 
+int findLast(int arr[], int size, int x)
+{
+    for (int i = size - 1; i >= 0; i--) 
+    {
+        if (arr[i] == x)
+            return i; 
+    }
+    return -1;
+}
+
+// 4.4 Вставка числа в массив
+int* add(int arr[], int size, int x, int pos)
+{
+    if (pos < 0 || pos > size) {
+        cout << "Ошибка: недопустимая позиция." << endl;
+        return nullptr;
+    }
+
+    int* newArr = new int[size + 1]; // создаем новый массив большего размера
+
+    for (int i = 0; i < pos; i++) {
+        newArr[i] = arr[i]; // копируем элементы до позиции
+    }
+
+    newArr[pos] = x; // вставляем новое число
+
+    for (int i = pos; i < size; i++) {
+        newArr[i + 1] = arr[i]; // копируем оставшиеся элементы
+    }
+
+    return newArr;
+}
+
+// 4.6 Реверс массива
+void reverse(int arr[], int size)
+{
+    for (int i = 0; i < size / 2; i++) {
+        int temp = arr[i];
+        arr[i] = arr[size - i - 1];
+        arr[size - i - 1] = temp;
+    }
+}
+
+// 4.8 Объединение двух массивов
+int* concat(int arr1[], int size1, int arr2[], int size2)
+{
+    int* result = new int[size1 + size2]; // создаем новый массив, который объединит два массива
+
+    for (int i = 0; i < size1; i++) {
+        result[i] = arr1[i]; // копируем первый массив
+    }
+
+    for (int i = 0; i < size2; i++) {
+        result[size1 + i] = arr2[i]; // копируем второй массив
+    }
+
+    return result;
+}
+
+// 4.10 Удаление всех отрицательных чисел из массива
+int* deleteNegative(int arr[], int size, int& newSize)
+{
+    newSize = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (arr[i] >= 0)
+            newSize++; // Подсчёт количества неотрицательных чисел
+    }
+
+    int* result = new int[newSize];
+    int index = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (arr[i] >= 0)
+            result[index++] = arr[i];
+    }
+
+    return result;
+}
+
+int main() {
+    // 1.2 Сумма последних цифр числа
+    int num = 4568;
+    cout << "1.2 Сумма последних двух цифр числа " << num << ": " << sumLastNums(num) << endl;
+
+    // 1.4 Проверка положительности числа
+    int x = -5;
+    cout << "1.4 " << x << (isPositive(x) ? " положительное." : " отрицательное.") << endl;
+
+    // 1.6 Проверка, является ли символ заглавной буквой
+    char ch = 'A';
+    cout << "1.6 " << ch << (isUpperCase(ch) ? " является заглавной буквой." : " не является заглавной буквой.") << endl;
+
+    // 1.8 Проверка, является ли одно число делителем другого
+    int a = 4, b = 16;
+    cout << "1.8 " << a << " и " << b << (isDivisor(a, b) ? " являются делителями." : " не являются делителями.") << endl;
+
+    // 1.10 Сумма последних цифр двух чисел
+    int num1 = 135, num2 = 782;
+    cout << "1.10 Сумма последних цифр " << num1 << " и " << num2 << ": " << lastNumSum(num1, num2) << endl;
+
+    // 2.2 Безопасное деление
+    int numerator = 10, denominator = 0;
+    cout << "2.2 Результат безопасного деления: " << safeDiv(numerator, denominator) << endl;
+
+    // 2.4 Сравнение двух чисел
+    int p = 15, q = 10;
+    cout << "2.4 Сравнение: " << makeDecision(p, q) << endl;
+
+    // 2.6 Проверка, является ли сумма двух чисел третьим числом
+    int x1 = 7, x2 = 3, x3 = 10;
+    cout << "2.6 " << (sum3(x1, x2, x3) ? "Одно из чисел равно сумме двух других." : "Ни одно из чисел не равно сумме двух других.") << endl;
+
+    // 2.8 Возраст в годах
+    int ageVal = 21;
+    cout << "2.8 Возраст: " << age(ageVal) << endl;
+
+    // 3.2 Реверс списка чисел
+    int reverseNum = 5;
+    cout << "3.2 Реверс списка чисел от " << reverseNum << ": " << reverseListNums(reverseNum) << endl;
+
+    // 3.4 Возведение в степень
+    int base = 2, exp = 5;
+    cout << "3.4 " << base << " в степени " << exp << ": " << pow(base, exp) << endl;
+
+    // 3.6 Проверка, состоят ли все цифры числа из одинаковых цифр
+    int identicalNum = 1111;
+    cout << "3.6 " << identicalNum << (equalNum(identicalNum) ? " состоит из одинаковых цифр." : " не состоит из одинаковых цифр.") << endl;
+
+    // 3.8 Построение левого треугольника
+    cout << "3.8 Левый треугольник:" << endl;
+    leftTriangle(5);
+
+    // 3.10 Игра в угадывание числа
+    cout << "3.10 ";
+    guessGame();
+
+    // 4.2 Поиск последнего вхождения числа в массиве
+    int arr[] = {1, 2, 3, 4, 2, 5};
+    int size = 6;
+    int searchNum = 2;
+    cout << "4.2 Последнее вхождение числа " << searchNum << " в массив: " << findLast(arr, size, searchNum) << endl;
+
+    // 4.4 Вставка числа в массив
+    int* newArr = add(arr, size, 99, 3);
+    cout << "4.4 Массив после вставки: ";
+    for (int i = 0; i < size + 1; i++) {
+        cout << newArr[i] << " ";
+    }
+    cout << endl;
+
+    // 4.6 Реверс массива
+    cout << "4.6 Массив до реверса: ";
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    reverse(arr, size);
+    cout << "\n4.6 Массив после реверса: ";
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    // 4.8 Объединение массивов
+    int arr1[] = {1, 2, 3};
+    int arr2[] = {4, 5, 6};
+    int* combinedArr = concat(arr1, 3, arr2, 3);
+    cout << "4.8 Объединенный массив: ";
+    for (int i = 0; i < 6; i++) {
+        cout << combinedArr[i] << " ";
+    }
+    cout << endl;
+
+    // 4.10 Удаление всех отрицательных чисел из массива
+    int arrNeg[] = {1, -2, 3, -4, 5};
+    int newSize;
+    int* positiveArr = deleteNegative(arrNeg, 5, newSize);
+    cout << "4.10 Массив после удаления отрицательных чисел: ";
+    for (int i = 0; i < newSize; i++) {
+        cout << positiveArr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
